@@ -1,21 +1,19 @@
 package ar.edu.utn.frsf.isi.dam.lab07_08c2016;
 
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
 public class ReclamoActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private GoogleMap myMap;
+    public GoogleMap myMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +48,34 @@ public class ReclamoActivity extends AppCompatActivity implements OnMapReadyCall
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        myMap=googleMap;
-        // COMPLETAR
+        myMap = googleMap;
+        //posicionActual();
+        actualizarMapa();
+    }
+
+    private void actualizarMapa() {
+        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},9999);
+            return;
+        }
+        myMap.setMyLocationEnabled(true);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults)
+    {
+        switch(requestCode) {
+            case 9999: {
+                if(grantResults.length> 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    actualizarMapa();
+                } else {
+                    Toast.makeText(this, "No permission for location", Toast.LENGTH_SHORT).show();
+                    }
+                return;
+            }
+        }
     }
 }
+
+
