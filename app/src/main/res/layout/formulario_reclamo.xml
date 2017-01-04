@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -48,6 +49,44 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/editTextEmail" />
+
+    <TextView
+        android:text="Imagen:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/TextViewImagen"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:weightSum="1">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="49dp"
+            android:inputType="text"
+            android:text="Adjuntar imagen..."
+            android:ems="10"
+            android:id="@+id/editTextImagenPath"
+            android:layout_weight="0.35"
+            android:textSize="12sp"
+            android:textColor="?attr/colorControlHighlight" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:id="@+id/imageButton" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_report_image"
+        android:id="@+id/imageView" />
 
     <LinearLayout
         android:orientation="horizontal"
